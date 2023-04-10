@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class MovePlayer : MonoBehaviour
 {
 
@@ -15,21 +17,21 @@ public class MovePlayer : MonoBehaviour
     private Animator _animator;
     private SpriteRenderer _sprite;
     public Joystick _joystick;
-    private enum  MovementState {idle,runnig,jump }
+    private enum MovementState { idle, runnig, jump }
     void Start()
     {
-         _rididbody = GetComponent<Rigidbody2D>();
+        _rididbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _sprite = GetComponent<SpriteRenderer>();
         _isGround = false;
-        
+
     }
     void Update()
     {
         float dirX = _joystick.Horizontal;
         float verticalMove = _joystick.Vertical;
         _rididbody.velocity = new Vector2(dirX * _spead, _rididbody.velocity.y);
-        if (verticalMove>.5f && _isGround == true)
+        if (verticalMove > .5f && _isGround == true)
         {
             _rididbody.AddForce(Vector2.up * _force, ForceMode2D.Impulse);
             _isGround = false;
@@ -73,5 +75,5 @@ public class MovePlayer : MonoBehaviour
             state = MovementState.jump;
         }
         _animator.SetInteger("state", (int)state);
-        }
+    }
 }

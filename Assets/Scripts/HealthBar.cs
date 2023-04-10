@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Slider))]
 public class HealthBar : MonoBehaviour
 {
     private Slider Slider;
@@ -23,5 +24,6 @@ public class HealthBar : MonoBehaviour
     public void GetHealth(int Health)
     {
        Slider.value=Health;
+
     }
 }
